@@ -2,6 +2,8 @@
 
 React frontend integration of Stripe payment gateway.
 
+![Screenshot (341)](https://user-images.githubusercontent.com/68691231/115967275-60cd5180-a54f-11eb-80bf-c1032ff6bda2.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
