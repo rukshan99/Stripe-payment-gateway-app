@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+import CheckoutForm from './CheckoutForm/CheckoutForm';
+
+const stripePromise = loadStripe("pk_test_51IjoKtLpaVzr78MNo7zCOQCZJMM3fICFBVB1SFWcNKBqsufQa0FciqtEFYPUo0jgBA2gGKwNCsnXvAOx8sNP2FNE006hv0u5uv");
 
 const successMessage = () => {
   return (
@@ -48,7 +54,7 @@ const cart = () => {
       </li>
       <li className="list-group-item d-flex justify-content-between">
         <span>Total (INR)</span>
-        <strong>₹2000</strong>
+        <strong>$2000</strong>
       </li>
     </ul>
   </React.Fragment>)
@@ -60,7 +66,7 @@ function App() {
   return (
     <div className="container">
       <div className="py-5 text-center">
-        <h4>Stripe Integration - <a href="https://www.cluemediator.com/" target="_blank" rel="noopener noreferrer">Clue Mediator</a></h4>
+        <h4>Stripe Integration</h4>
       </div>
 
       <div className="row s-box">
@@ -69,7 +75,9 @@ function App() {
             {cart()}
           </div>
           <div className="col-md-7 order-md-1">
-            {/* Checkout form */}
+          <Elements stripe={stripePromise}>
+              <CheckoutForm amount={2000} setPaymentCompleted={setPaymentCompleted} />
+            </Elements>
           </div>
         </React.Fragment>}
       </div>
