@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+
 import {
   useStripe, useElements,
   CardNumberElement, CardExpiryElement, CardCvcElement
 } from '@stripe/react-stripe-js';
+
+import { stripePaymentMethodHandler } from './script';
 
 const CARD_ELEMENT_OPTIONS = {
   style: {
@@ -41,9 +44,10 @@ export default function CheckoutForm(props) {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+
     setLoading(true);
     setErrorMsg('');
- 
+
     const paymentMethodObj = {
       type: 'card',
       card: elements.getElement(CardNumberElement),
@@ -52,15 +56,14 @@ export default function CheckoutForm(props) {
         email
       },
     };
-
     const paymentMethodResult = await stripe.createPaymentMethod(paymentMethodObj);
- 
+
     stripePaymentMethodHandler({
       result: paymentMethodResult,
       amount: props.amount
     }, handleResponse);
   };
- 
+
   // callback method to handle the response
   const handleResponse = response => {
     setLoading(false);
@@ -69,7 +72,6 @@ export default function CheckoutForm(props) {
       return;
     }
     props.setPaymentCompleted(response.success ? true : false);
-  };
   };
 
   return (

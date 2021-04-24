@@ -66,7 +66,7 @@ function App() {
   return (
     <div className="container">
       <div className="py-5 text-center">
-        <h4>Stripe Integration</h4>
+        <h4>Stripe Payment Gateway</h4>
       </div>
 
       <div className="row s-box">
