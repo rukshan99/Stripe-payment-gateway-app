@@ -41,6 +41,35 @@ export default function CheckoutForm(props) {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
+    setLoading(true);
+    setErrorMsg('');
+ 
+    const paymentMethodObj = {
+      type: 'card',
+      card: elements.getElement(CardNumberElement),
+      billing_details: {
+        name,
+        email
+      },
+    };
+
+    const paymentMethodResult = await stripe.createPaymentMethod(paymentMethodObj);
+ 
+    stripePaymentMethodHandler({
+      result: paymentMethodResult,
+      amount: props.amount
+    }, handleResponse);
+  };
+ 
+  // callback method to handle the response
+  const handleResponse = response => {
+    setLoading(false);
+    if (response.error) {
+      setErrorMsg(typeof response.error === 'string' ? response.error : response.error.message);
+      return;
+    }
+    props.setPaymentCompleted(response.success ? true : false);
+  };
   };
 
   return (
