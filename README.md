@@ -1,6 +1,6 @@
 # Stripe Payment Gateway
 
-React frontend integration of Stripe payment gateway.
+React frontend integration of Stripe payment gateway. Implemented with reference to [this tutorial](https://www.cluemediator.com/integrate-stripe-payment-gateway-in-react)
 
 ![Screenshot (341)](https://user-images.githubusercontent.com/68691231/115967275-60cd5180-a54f-11eb-80bf-c1032ff6bda2.png)
 
